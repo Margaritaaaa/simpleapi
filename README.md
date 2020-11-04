@@ -95,5 +95,4 @@ Curl
 
 Приложение развернуто на Heroku: https://simpleapii.herokuapp.com/api/v1/computers
 
-Travis CI badge [![Build Status](https://travis-ci.org/Margaritaaaa/simpleapi.svg?branch=master)]
-
+Travis CI badge [![Build Status](https://travis-ci.org/Margaritaaaa/simpleapi.svg?branch=master)](https://travis-ci.com/username/projectname)
