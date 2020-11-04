@@ -87,3 +87,10 @@ Curl
   
     Удалить конкретный товар по id
       http://localhost:8080/api/v1/computers/10
+      
+      
+Лабораторная работа №3: CI/CD и деплой приложения в Heroku
+
+Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
+
+Приложение развернуто на Heroku: https://simpleapii.herokuapp.com/api/v1/computers
