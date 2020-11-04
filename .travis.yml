@@ -1,6 +1,28 @@
-dist: trusty # репозиторий внутри travis
+dist: trusty
 jdk: oraclejdk8
 language: java
 services:
   - postgresql
   - docker
+env:
+  global:
+    - secure: "hpBhEYYI+rtJX5em1KRq8jXQh9NZnhPZWJT5gmPcewB/pSMamoa8YPNYqfFwU014JIrjV/WpIy4m9LSJjKxsamqgVKY/mZyTvavWN/aAenptHqoHjK7Y7E7GK15maQn3EUz68lK7UlQd9uztRBvXnUDeDxN7IT5RRk2yMoOke3mnkdT9yfFPdbd/MHyYw208QizSpoudQvcPQcS+Qx6wGlU7fgnCuuZneZx8a/YR/GbsPKqz80wZ1kLmtob+QV9aHbiS3VgGWlf70xyPHzXyMJrQpjzpP1G30xskl+tVgDf8xNVQDJiwQnL7BgEkWih2tYwoxiFdt+Rd0RqqUx4FM0MDH8StBspQ6S8pkmv5YKb2OX82xBZ0WRXnoa47zRUmMgywZnlJT5hN9zjXaaGHuGdIx0kRyTEl8GJXyzHQLTbysmfSmXjmxChpjLP6wi578B7C8vtI16Xux2fjcG58eHS4gJytGx5EnM5X5cPJZZFL52XAimeS9XD1LX1WxaCX3FH5gd1NNvU8xfV7uKVmKedmtJADS1HnUC0nWpF2SoFAbkQTX5uj4CVcfXuQQNvIhM0riBpQblhOsn6ZoWCFysDM1EpCBOX5vNIEGDNCCyJ4r2yWvBrkENW1WvFQ056UFsWWBkVU5tt6LamfjwwdciPJJCMd7C4hrXgk0HLxXW8="
+    - secure: "KspfNiK/KMZI7AG9DqxHocABlM85oalwj9ZBnLXtyqm7Xzij2ycxf7YjYgV/veaA+XVkPy63+wjH8TI6CEcaOK04RnmxhzkGbR8QRU03wzwgCuPKOMY0l5JrTtPBOhYc7djEdjpPOY+VbL/fcLCCilssbH1/+0NhcNY2nNqjUK52gWYDmSbABA/m4RzdNcHbrgKT+T5KWIHibl4jjEybdnIpkgyg1IZ5h28MhkhwyoEBjRMlJMVNuU59SRBSxDG/FrbSsFAIf/GjeQJm6QMdO1ExZ7yNmjLmO0Ogw5Gr9NiW8hxRmcalmxD1iLPxcLR2WBkcRfo7XrH7/GhSAW9MgEFCKU+LS+AqDGP7wJrxNvZPWeD62MhCR+n3KdwtopdXnM6Y/hEMm0IFuSN2NMl4cEe20p551LRk+xzTtn98j2Mmmu0Szf4axUqa5AtA51+Vm942vWgNyrwrqcvXkpLsqVb8bBiwFLGTMNYv92TZ6FotNbsHeRYwdTnE74uPyuVgRwUIpBo9rcvLLMp7vUSepSYgSbY2yRyORDCHdEu6dZ+mLoYcVKHCyXX/5AGct2vu1Poryv0qsbQaLldwzNfksr+iz1L01Crbp3NH0lYr9pNlykSZdcYITa4WJc0U2DwC5sHmDhVckw6pZ5TfxkBQVOy3y3dsyuAuknWI5faTEqU="
+    - secure: "cuxzS7LVREP6bOxyMz+iltw9mDul6OS4mWqmQvMVvGnR+uRgHhlv4aV4/ocjAl4KfhH0upfUT2wjXG+NQvHXMbkPjMWG8bw/z1A3XXH+T/Fb6fhuVFpzu7Zv3hGAPA9frWPjuiyKHcwljMDqySvC6dQTAR2++UPkttefLAUBc/rIfKpHAVwnTky+jQDb6BqXmzK+FD75GuKr7Hv4frsRY12X0Xx83S+HN1T989XKHRZwCqbOh6TtCqF3QGV+R1FhxeSg4Nb6b1q4aDeMVrzN9mWib2raIJzfm38Aq/u3Bo4upCu38HMH4BvXGUbZFl0I5qDI+sD/zAllvSUtrypZnBZ+ABP1aBqnsnay5CkmdD8ZfHS2b7T8ZGiKRHShhONdlYCLZMWUBUO6OcfwMif1eRVvKfDieqT70ogtmSFyGw9nahxqYvun1RS3lfAw8Ycahl4EEr3DV74aCFxUblxVV2HkuXVvOKvBmQIvT/jfmR3omuzSB1JXpaG/ctBg4fiQWSZBOlUuWNM74v5CMOHyUzsrcgQPnKpQNRSgIbKXIgieWPIzAGzPapcnVR1nWWYizMfbuJ1t+3VPysQ2xN0d1Ytvunha2Ualhd6m8Cv63WaFNpYnxuW0o9c5YL9ztr6td+xPscqS9IS843SIZBsu8Gdz+90yQbdDwsSaDLpyIxI="
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+script:
+  - ./mvnw clean install -B
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo "$TRAVIS_BRANCH"; fi`
+  - export IMAGE_NAME=myapi/my-docker-repo
+  - docker build -t $IMAGE_NAME:latest .
+  - docker tag $IMAGE_NAME:latest $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME:$TAG
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: simpleapii
