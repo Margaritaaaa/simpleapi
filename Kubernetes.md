@@ -36,7 +36,7 @@
 	          ports:
 	            - containerPort: 8080
 	      hostAliases:
-	      - ip: "192.168.49.1" # The IP of your VM
+	      - ip: "127.0.0.1" # The IP of your VM
 	        hostnames:
 	        - postgres.local
 			
