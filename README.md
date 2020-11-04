@@ -94,3 +94,6 @@ Curl
 Целью лабораторной работы является знакомство с CI/CD и его реализацией на примере Travis CI и Heroku.
 
 Приложение развернуто на Heroku: https://simpleapii.herokuapp.com/api/v1/computers
+
+Travis CI badge [![Build Status](https://travis-ci.com/Margaritaaaa/simpleapi.svg?branch=master)](https://travis-ci.com/Margaritaaaa/simpleapi)
+
