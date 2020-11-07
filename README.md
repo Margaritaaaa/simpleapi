@@ -72,11 +72,11 @@ Curl
 Метод: GET
   
     Получить все данные 
-      curl -X GET http://localhost:8080/api/v1/computers
+      curl http://localhost:8080/api/v1/computers
     Получить конкретный компьютер по id
-      curl -X GET http://localhost:8080/api/v1/computers/2
+      curl http://localhost:8080/api/v1/computers/2
     Для возрата hostName
-      curl -X GET http://localhost:8080/api/v1/status
+      curl http://localhost:8080/api/v1/status
     
 Метод: POST
 
