@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/Margaritaaaa/simpleapi.svg?branch=master)](https://travis-ci.org/github/Margaritaaaa/simpleapi)
 # Лабораторная работа №1: создание микросервиса на Spring Boot с базой данных
 
 # Савостьянова М.С. МБД2031
@@ -8,7 +8,7 @@
 
 Первоначально необходимо склонировать текущую репозиторию. Клонирование можно осуществить тремя разными способами: 
 
-![clone](https://github.com/Margaritaaaa/JavaSimpleApi/blob/main/clone.png)
+![clone](https://github.com/Margaritaaaa/simpleapi/blob/master/clone2.png)
 
 Наиболеее удобный способ получения копии существующего Git-репозитория это командой git clone <url>
 
@@ -20,9 +20,19 @@
 
 1. Для сборки приложения в Maven в среде для разработки IntelliJ IDEA
 
-Зайти во вкладку maven: simpleApi -> Lifecycle -> package
+Сборку можно осуществить двумя различными вариантами: через интерфейс или через консоль.
 
-![maven](https://github.com/Margaritaaaa/JavaSimpleApi/blob/main/maven.png)
+Через интерфейс: зайти во вкладку maven: simpleApi -> Lifecycle -> package
+
+Через консоль: находясь в директории проекта необходимо выполнить команду (с пропуском тестирования)    
+        
+    mvn package -Dmaven.test.skip=true
+
+Результатом будет файл с расширением .jar
+
+    simpleapi-1.0.jar
+
+Файл будет располагаться в новой папке target
   
 2. Прописать Dockerfile, где указать:
 
@@ -72,21 +82,16 @@ Curl
 
     Сохранить новый товар
     Curl 
-      http://localhost:8080/api/v1/computers
-    Пример join 
-      {
-          "type": "Laptop",
-          "cpu": "Intel Core i9",
-          "name": "Dell XPS 13",
-          "employee": "Levin"
-      }
-       
+      curl -X POST http://localhost:8080/api/v1/computers -d ‘{ "type": "Laptop", "cpu": "Intel Core i9", ""name": "Dell XPS 13", "employee": "Levin" "distance"}’ -H «Content-Type:application/json» 
+    
+Ответом на данный curl будет статус "200 ОК".       
 
 Метод: DELETE
   
     Удалить конкретный товар по id
-      http://localhost:8080/api/v1/computers/10
+      http://localhost:8080/api/v1/computers/{id}
       
+В качестве {id} необходимо подставить выбранный id товара, который нужно удалить из таблицы.
       
 # Лабораторная работа №3: CI/CD и деплой приложения в Heroku
 Лабораторная работа по дисциплине: Технологии разработки программного обеспечения
@@ -95,4 +100,4 @@ Curl
 
 Приложение развернуто на Heroku: https://simpleapii.herokuapp.com/api/v1/computers
 
-Travis CI badge [![Build Status](https://travis-ci.org/Margaritaaaa/simpleapi.svg?branch=master)](https://travis-ci.com/Margaritaaaa/simpleapi)
+
