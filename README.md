@@ -82,7 +82,7 @@ Curl
 
     Сохранить новый товар
     Curl 
-      curl -X POST http://localhost:8080/api/v1/computers -d ‘{ "type": "Laptop", "cpu": "Intel Core i9", ""name": "Dell XPS 13", "employee": "Levin" "distance"}’ -H «Content-Type:application/json» 
+      curl -X POST http://localhost:8080/api/v1/computers -d ‘{ "type": "Laptop", "cpu": "Intel Core i9", ""name": "Dell XPS 13", "employee": "Levin"}’ -H «Content-Type:application/json» 
     
 Ответом на данный curl будет статус "200 ОК".       
 
