@@ -72,11 +72,11 @@ Curl
 Метод: GET
   
     Получить все данные 
-      http://localhost:8080/api/v1/computers
+      curl -X GET http://localhost:8080/api/v1/computers
     Получить конкретный компьютер по id
-      http://localhost:8080/api/v1/computers/2
+      curl -X GET http://localhost:8080/api/v1/computers/2
     Для возрата hostName
-      http://localhost:8080/api/v1/status
+      curl -X GET http://localhost:8080/api/v1/status
     
 Метод: POST
 
@@ -89,7 +89,7 @@ Curl
 Метод: DELETE
   
     Удалить конкретный товар по id
-      curl -X POST http://localhost:8080/api/v1/computers/{id}
+      curl -X DELETE http://localhost:8080/api/v1/computers/{id}
       
 В качестве {id} необходимо подставить выбранный id товара, который нужно удалить из таблицы. Ответом на данный curl будет статуc "204 No Content".
       
